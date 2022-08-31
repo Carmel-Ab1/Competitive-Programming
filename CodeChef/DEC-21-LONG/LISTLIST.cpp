@@ -1,3 +1,8 @@
+/*
+#pragma GCC target ("avx2")
+#pragma GCC optimization ("O3")
+#pragma GCC optimization ("unroll-loops")
+ */
 #include<bits/stdc++.h>
 //#include <ext/pb_ds/assoc_container.hpp>
 //#include <ext/pb_ds/tree_policy.hpp>
@@ -26,6 +31,7 @@ template<typename T> ostream& operator<<(ostream& os, vector<T>& a){os<<"[";for(
 #define YES out("YES")
 #define NO out("NO")
 #define out(x){cout << x << "\n"; return;}
+#define outfl(x){cout << x << endl;return;}
 #define GLHF ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define print(x){for(auto ait:x) cout << ait << " "; cout << "\n";}
 #define pb push_back
@@ -55,55 +61,7 @@ vector<T>UNQ(vector<T>a){
             ans.push_back(t);
     return ans;
 }
-ll ceil(ll a,ll b){
-    ll ans=a/b;
-    if(a%b)ans++;
-    return ans;
-}
-ld log (ld a,ld b){return log(b)/log(a);}
-ll power(ll base, ll exp,ll M=1e18){//(base^exp)%M
-    ll ans=1;
-    while(exp){
-        if(exp%2==1)ans=((ans%M)*(base%M))%M;
-        base=((base%M)*(base%M))%M;
-        exp/=2;
-    }
-    return ans;
-}
 
-string to_base(int n,int new_base){
-    string s;
-    int nn=n;
-    while(nn){
-        s+=to_string(nn%new_base);
-        nn/=new_base;
-    }
-    reverse(all(s));
-    return s;
-}
-ll gcd(ll a,ll b){
-    if(a<b)swap(a,b);
-    if(b==0)return a;
-    return gcd(b,a%b);
-}
-ll lcm(ll a,ll b){
-    ll x= (a/gcd(a,b));
-    return b*x;
-}
-vl generate_array(ll n,ll mn=1,ll mx=1e18+1){
-    if(mx==1e18+1)
-        mx=n;
-    vl ans(n);
-    for(int i=0; i<n;i++)
-        ans[i]=(mn+rand()%(mx-mn+1));
-    return ans;
-}
-string substr(string s,int l,int r){
-    string ans;
-    for(int i=l; i<=r; i++)
-        ans+=s[i];
-    return ans;
-}
 
 
 void solve();
@@ -113,9 +71,6 @@ int main(){
     cin >> t;
     while(t--)
         solve();
-}
-int calc(int x){
-
 }
 void solve() {
     int n;
