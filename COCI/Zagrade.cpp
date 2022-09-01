@@ -6,10 +6,10 @@
 #include<bits/stdc++.h>
 //#include <ext/pb_ds/assoc_container.hpp>
 //#include <ext/pb_ds/tree_policy.hpp>
-
+ 
 //using namespace __gnu_pbds;
 using namespace std;
-
+ 
 typedef long double ld;
 typedef long long ll;
 typedef unsigned long long ull;
@@ -23,10 +23,10 @@ typedef vector<pl> vpl;
 typedef vector<ld> vld;
 typedef pair<ld,ld> pld;
 typedef vector<pi> vpi;
-
+ 
 //typedef tree<ll, null_type, less_equal<ll>,rb_tree_tag,tree_order_statistics_node_update> ordered_set;
 template<typename T> ostream& operator<<(ostream& os, vector<T>& a){os<<"[";for(int i=0; i<ll(a.size()); i++){os << a[i] << ((i!=ll(a.size()-1)?" ":""));}os << "]\n"; return os;}
-
+ 
 #define all(x) x.begin(),x.end()
 #define YES out("YES")
 #define NO out("NO")
@@ -36,7 +36,7 @@ template<typename T> ostream& operator<<(ostream& os, vector<T>& a){os<<"[";for(
 #define print(x){for(auto ait:x) cout << ait << " "; cout << "\n";}
 #define pb push_back
 #define umap unordered_map
-
+ 
 template<typename T1, typename T2> istream& operator>>(istream& is, pair<T1, T2>& p){is >> p.first >> p.second;return is;}
 template<typename T1, typename T2> ostream& operator<<(ostream& os, pair<T1, T2>& p){os <<"" << p.first << " " << p.second << ""; return os;}
 void usaco(string taskname){
@@ -61,9 +61,9 @@ vector<T>UNQ(vector<T>a){
             ans.push_back(t);
     return ans;
 }
-
-
-
+ 
+ 
+ 
 void solve();
 int main(){
     GLHF;
@@ -72,7 +72,7 @@ int main(){
     while(t--)
         solve();
 }
-
+ 
 bool ask(int l,int r){
     cout << "? " << l << " " << r << endl;
     int ans;
@@ -80,37 +80,29 @@ bool ask(int l,int r){
     if(ans)return 1;
     else return 0;
 }
-
-
+ 
+ 
 void solve() {
     int n,q;
     cin >> n >> q;
-
+ 
     stack<int>S;
     string ans(n+1,' ');
-
-
+ 
+ 
     S.push(1);
-
+ 
     for(int i=2; i<=n; i++){
         if(S.size() && ask(S.top(),i))
             ans[S.top()]='(',ans[i]=')',S.pop();
         else
             S.push(i);
     }
-
-    int left=0;
-    for(int i=1; i<=n; i++)
-        if(ans[i]==' ')
-            left++;
-    int l=0;
-
-    for(int i=1; i<=n; i++){
-        if(ans[i]!=' ')continue;
-        if(2*l<left)
-            ans[i]=')',l++;
-        else
-            ans[i]='(';
-    }
+ 
+    int sz=S.size();
+    while(S.size()>sz/2)
+        ans[S.top()]='(',S.pop();
+    while(S.size())
+        ans[S.top()]=')',S.pop();
     cout << "! " << ans.substr(1,n) << endl;
 }
